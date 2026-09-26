@@ -5,8 +5,8 @@ Base = declarative_base()
 class Students(Base):
     __tablename__="students"
     Id = Column(Integer,primary_key=True,index=True)
-    Name = Column(String)
-    Dept = Column(String)
+    Name = Column(String(50))
+    Dept = Column(String(50))
     Cgpa = Column(Float)
 
 

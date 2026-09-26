@@ -1,6 +1,8 @@
-from sqlalchemy.orm import sessionmaker,create_engine
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy import create_engine
 
-DB_URL = "mysql://root:Srikar2201@localhost:3306/fastapi"
+
+DB_URL = "mysql+pymysql://root:Srikar2201@localhost:3306/fastapi"
 engine = create_engine(DB_URL)
 SessionLocal = sessionmaker(autoFlush = False, autoCommit = False, bind = engine)
 
