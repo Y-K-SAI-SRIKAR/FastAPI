@@ -4,7 +4,7 @@ from sqlalchemy import create_engine
 
 DB_URL = "mysql+pymysql://root:Srikar2201@localhost:3306/fastapi"
 engine = create_engine(DB_URL)
-SessionLocal = sessionmaker(autoFlush = False, autoCommit = False, bind = engine)
+SessionLocal = sessionmaker(autoflush = False, autocommit = False, bind = engine)
 
 """
 SQLAlchemy is a python SQL toolkit along with ORM support.
