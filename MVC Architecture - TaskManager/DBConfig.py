@@ -4,7 +4,7 @@ from sqlalchemy import create_engine
 DB_URL = "mysql+pymysql://root:Srikar2201@localhost:3306/taskmanager"
 engine = create_engine(DB_URL)
 Session = sessionmaker(autocommit=False,
-                        autoFlus=False,
+                        autoFlush=False,
                         bind=engine
                         )
 
