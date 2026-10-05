@@ -8,5 +8,5 @@ class Tasks(Base):
     TaskId = Column(Integer,primary_key=True,index=True)
     TaskName = Column(String(50))
     TaskDesc = Column(String(100))
-    TaskStatus = Column(Boolean=False)
+    TaskStatus = Column(Boolean)
 

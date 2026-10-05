@@ -10,6 +10,7 @@ app.add_middleware(CORSMiddleware,
                    )
 
 app.include_router(routes)
+
 @app.get("/")
 def greet():
     return "Welcome to MVC APP"
