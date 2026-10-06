@@ -3,3 +3,5 @@ uvicorn
 sqlalchemy
 pymysql
 mysql-connector-python
+pwdlib
+pyjwt
