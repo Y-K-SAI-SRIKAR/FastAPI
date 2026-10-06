@@ -4,7 +4,7 @@ class UsersRequestSchema(BaseModel):
     Name:str
     UserName:str
     UserEmail:str
-    HashPassword:str
+    Password:str
 
 class UsersResponseSchema(BaseModel):
     Id:int
