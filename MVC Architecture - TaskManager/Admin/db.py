@@ -1,5 +1,5 @@
-from DBConfig import engine, Session
-import AdminModel
+from .DBConfig import engine, Session
+from . import AdminModel
 
 AdminModel.Base.metadata.create_all(bind = engine)
 

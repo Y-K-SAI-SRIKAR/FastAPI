@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from Router import routes
+from Admin.Router import Adminroutes
 
 app = FastAPI(title="MVC APP")
 
@@ -9,11 +9,11 @@ app.add_middleware(CORSMiddleware,
                    allow_methods=["*"]
                    )
 
-app.include_router(routes)
+app.include_router(Adminroutes)
 
 @app.get("/")
 def greet():
-    return "Welcome to MVC APP"
+    return "Welcome to TaskManager APP"
 
 
 #Here we are importing endpoints from a router instead of declaring the routes in main function.

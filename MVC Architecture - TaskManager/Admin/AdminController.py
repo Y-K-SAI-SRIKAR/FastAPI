@@ -1,4 +1,4 @@
-import AdminModel
+from . import AdminModel
 
 def create_task(task,db):
     db_task = AdminModel.Tasks(**task.model_dump())
