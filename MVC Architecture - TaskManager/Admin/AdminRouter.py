@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from . import AdminController
-from .db import con_db
+from .Admindb import con_db
 from .AdminDTO import TaskSchema
 from fastapi import Depends
 from sqlalchemy.orm import Session

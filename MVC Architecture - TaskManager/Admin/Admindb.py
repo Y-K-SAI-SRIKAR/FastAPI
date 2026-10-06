@@ -1,4 +1,4 @@
-from .DBConfig import engine, Session
+from .AdminDBConfig import engine, Session
 from . import AdminModel
 
 AdminModel.Base.metadata.create_all(bind = engine)

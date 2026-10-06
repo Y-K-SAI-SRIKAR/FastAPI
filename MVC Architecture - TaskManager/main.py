@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from Admin.Router import Adminroutes
+from Admin.AdminRouter import Adminroutes
 
 app = FastAPI(title="MVC APP")
 
