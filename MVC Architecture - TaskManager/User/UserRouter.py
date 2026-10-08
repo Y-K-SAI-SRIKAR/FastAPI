@@ -1,4 +1,4 @@
-from fastapi import APIRouter,Depends
+from fastapi import APIRouter,Depends,Request
 from . import UserController
 from .Userdb import con_Udb
 from .UserDTO import UsersRequestSchema, UsersResponseSchema, UsersLoginSchema
@@ -13,3 +13,7 @@ def register_user(body:UsersRequestSchema,db:Session=Depends(con_Udb)):
 @Userroutes.post("/login")
 def login_user(body:UsersLoginSchema, db:Session=Depends(con_Udb)):
     return UserController.login_user(body,db)
+
+@Userroutes.get("/auth",response_model = UsersResponseSchema)
+def is_auth(request:Request, db:Session=Depends(con_Udb)):
+    return UserController.is_auth(request,db)

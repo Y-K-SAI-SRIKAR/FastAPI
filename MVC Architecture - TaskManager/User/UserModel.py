@@ -10,3 +10,4 @@ class Users(Base):
     UserName = Column(String(50),nullable=False)
     UserEmail = Column(String(100),nullable=False)
     HashPassword = Column(String(255),nullable=False)
+
