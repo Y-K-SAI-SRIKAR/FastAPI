@@ -3,5 +3,5 @@ uvicorn
 sqlalchemy
 pymysql
 mysql-connector-python
-pwdlib
+'pwdlib[argon2]'
 pyjwt
