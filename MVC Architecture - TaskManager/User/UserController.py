@@ -1,10 +1,16 @@
 from . import UserModel
-from fastapi import HTTPException
+from fastapi import HTTPException,status
 from pwdlib import PasswordHash
+import jwt
+from datetime import datetime, timedelta
+from Utils import Settings
 
-password_hash = PasswordHash.recommended()
+password_hasher = PasswordHash.recommended()
 def get_password(password):
-    return password_hash.hash(password)
+    return password_hasher.hash(password)
+
+def verify_password(plain_password,hashed_password):
+    return password_hasher.verify(plain_password,hashed_password)
     
 
 def register_user(body,db):
@@ -26,4 +32,18 @@ def register_user(body,db):
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
-    return "User Created Successfully !"
+    return new_user
+
+def login_user(body,db):
+    user = db.query(UserModel.Users).filter(UserModel.Users.UserName == body.UserName).first()
+    if not user:
+        raise HTTPException(status_code = status.HTTP_401_UNAUTHORIZED, detail = "Incorrect UserName")
+
+    verified_password = verify_password(body.Password, user.HashPassword)
+    if not verified_password:
+        raise HTTPException(status_code = status.HTTP_401_UNAUTHORIZED, detail = "Incorrect Password")
+
+    exp_time = datetime.now()+timedelta(minutes=Settings.settings.ACCESS_TOKEN_EXPIRE_MINUTES)
+    token =  jwt.encode({"_id":user.Id,"exp":exp_time}, Settings.settings.SECURITY_KEY, Settings.settings.ALGORITHM)
+
+    return {"Login Success":token}
