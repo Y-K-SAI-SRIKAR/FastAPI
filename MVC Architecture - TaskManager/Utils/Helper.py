@@ -1,11 +1,13 @@
-from fastapi import status, HTTPException
-from User import UserModel, Userdb
+from fastapi import status, HTTPException,Request, Depends
+from sqlalchemy.orm import Session
+from User import UserModel
+from User import Userdb
 from jwt.exceptions import InvalidTokenError
 import jwt
 from datetime import datetime, timedelta, timezone
 from Utils import Settings
 
-def is_auth(request, db):
+def is_auth(request:Request, db:Session=Depends(Userdb.con_Udb)):
     try:
         auth_token = request.headers.get("AuthKey")
         if not auth_token:
