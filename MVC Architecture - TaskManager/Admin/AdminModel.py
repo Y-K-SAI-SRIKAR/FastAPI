@@ -10,5 +10,5 @@ class Tasks(Base):
     TaskName = Column(String(50))
     TaskDesc = Column(String(100))
     TaskStatus = Column(Boolean)
-    UserId = Column(Integer,ForeignKey("users.Id"),ondelete="CASCADE")
+    UserId = Column(Integer,ForeignKey("users.Id",ondelete="CASCADE"))
 
