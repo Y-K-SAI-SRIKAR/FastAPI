@@ -6,6 +6,7 @@ class Settings(BaseSettings):
     SECURITY_KEY : str
     ALGORITHM : str
     ACCESS_TOKEN_EXPIRE_MINUTES : int
+    DB_URL : str
 
 settings = Settings()
     
