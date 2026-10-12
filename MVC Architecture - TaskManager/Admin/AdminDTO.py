@@ -6,6 +6,13 @@ class TaskSchema(BaseModel):
     TaskDesc : str
     TaskStatus : bool=False
 
+class TaskResponseSchema(BaseModel):
+    TaskId : int
+    TaskName : str
+    TaskDesc : str
+    TaskStatus : bool
+    User_Id : int | None = None
+
 
 """
 DTO is Data Transfer Object which is used for passing states from frontend to DB layer.

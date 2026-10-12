@@ -1,11 +1,12 @@
 from fastapi import APIRouter, Depends
 from . import AdminController
 from .Admindb import con_db
-from .AdminDTO import TaskSchema
+from .AdminDTO import TaskSchema, TaskResponseSchema
 from fastapi import Depends
 from sqlalchemy.orm import Session
 from User import UserModel
 from Utils import Helper
+from typing import List
 
 
 Adminroutes = APIRouter(prefix="/routes")
@@ -14,11 +15,11 @@ Adminroutes = APIRouter(prefix="/routes")
 def create_tasks(task:TaskSchema,user:UserModel=Depends(Helper.is_auth) ,db:Session=Depends(con_db)):
     return AdminController.create_task(task,db)
 
-@Adminroutes.get("/task")
+@Adminroutes.get("/task",response_model =List[TaskResponseSchema])
 def get_all_tasks(user:UserModel=Depends(Helper.is_auth),db:Session = Depends(con_db)):
     return AdminController.get_all_tasks(db)
 
-@Adminroutes.get("/task/{id}")
+@Adminroutes.get("/task/{id}",response_model =List[TaskResponseSchema])
 def get_task_by_id(taskId:int,user:UserModel=Depends(Helper.is_auth),db:Session=Depends(con_db)):
     return AdminController.get_task_by_id(taskId,db)
 

@@ -1,8 +1,7 @@
-from sqlalchemy.ext.declarative import declarative_base
+from User import UserModel
 from sqlalchemy import Column,Integer,String,Boolean,ForeignKey
 
-
-Base = declarative_base()
+Base = UserModel.Base
 
 class Tasks(Base):
     __tablename__="Tasks"
@@ -10,5 +9,5 @@ class Tasks(Base):
     TaskName = Column(String(50))
     TaskDesc = Column(String(100))
     TaskStatus = Column(Boolean)
-    UserId = Column(Integer,ForeignKey("users.Id",ondelete="CASCADE"))
+    UserId = Column(Integer,ForeignKey("Users.Id",ondelete="CASCADE"))
 
