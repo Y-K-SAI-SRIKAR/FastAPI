@@ -13,11 +13,11 @@ Adminroutes = APIRouter(prefix="/routes")
 
 @Adminroutes.post("/task")
 def create_tasks(task:TaskSchema,user:UserModel=Depends(Helper.is_auth) ,db:Session=Depends(con_db)):
-    return AdminController.create_task(task,db)
+    return AdminController.create_task(task,db,user)
 
 @Adminroutes.get("/task",response_model =List[TaskResponseSchema])
 def get_all_tasks(user:UserModel=Depends(Helper.is_auth),db:Session = Depends(con_db)):
-    return AdminController.get_all_tasks(db)
+    return AdminController.get_all_tasks(db,user)
 
 @Adminroutes.get("/task/{id}",response_model =List[TaskResponseSchema])
 def get_task_by_id(taskId:int,user:UserModel=Depends(Helper.is_auth),db:Session=Depends(con_db)):

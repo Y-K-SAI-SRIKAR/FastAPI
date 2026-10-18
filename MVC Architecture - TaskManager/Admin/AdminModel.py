@@ -5,7 +5,7 @@ Base = UserModel.Base
 
 class Tasks(Base):
     __tablename__="Tasks"
-    TaskId = Column(Integer,primary_key=True,index=True)
+    TaskId = Column(Integer,primary_key=True,index=True,autoincrement=True)
     TaskName = Column(String(50))
     TaskDesc = Column(String(100))
     TaskStatus = Column(Boolean)

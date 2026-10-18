@@ -1,17 +1,16 @@
 from pydantic import BaseModel
 
 class TaskSchema(BaseModel):
-    TaskId : int
     TaskName : str
     TaskDesc : str
     TaskStatus : bool=False
 
 class TaskResponseSchema(BaseModel):
-    TaskId : int
-    TaskName : str
-    TaskDesc : str
-    TaskStatus : bool
-    User_Id : int | None = None
+    TaskId: int
+    TaskName: str
+    TaskDesc: str
+    TaskStatus: bool
+    UserId: int | None = None
 
 
 """
