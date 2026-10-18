@@ -1,4 +1,5 @@
 from . import AdminModel
+from fastapi import HTTPException
 
 def create_task(task,db,user):
     db_task = AdminModel.Tasks(**task.model_dump(),UserId=user.Id)
@@ -20,22 +21,22 @@ def get_task_by_id(taskId,db):
     else:
         return "No Such Tasks Found"
 
-def delete_task_by_id(taskId,db):
+def delete_task_by_id(taskId,db,user):
     db_task = db.query(AdminModel.Tasks).filter(AdminModel.Tasks.TaskId == taskId).first()
-    if db_task:
+    if db_task and (db_task.UserId == user.Id):
         db.delete(db_task)
         db.commit()
         return "Operation Success"
     else:
-        return "No Task Exists"
+        raise HTTPException(401,detail="UnAuthorized Action")
 
-def update_task_by_id(task,taskId,db):
+def update_task_by_id(task,taskId,db,user):
     db_task = db.query(AdminModel.Tasks).filter(AdminModel.Tasks.TaskId == taskId).first()
-    if db_task:
+    if db_task and (db_task.UserId == user.Id):
         db_task.TaskName = task.TaskName
         db_task.TaskDesc = task.TaskDesc
         db_task.TaskStatus = task.TaskStatus
         db.commit()
         return "Operation Success"
     else:
-        return "No Such Task Exists"
+        raise HTTPException(401,detail="UnAuthorized Action")

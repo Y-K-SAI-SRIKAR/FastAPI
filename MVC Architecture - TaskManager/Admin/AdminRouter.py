@@ -19,14 +19,14 @@ def create_tasks(task:TaskSchema,user:UserModel=Depends(Helper.is_auth) ,db:Sess
 def get_all_tasks(user:UserModel=Depends(Helper.is_auth),db:Session = Depends(con_db)):
     return AdminController.get_all_tasks(db,user)
 
-@Adminroutes.get("/task/{id}",response_model =List[TaskResponseSchema])
+@Adminroutes.get("/task/{taskId}",response_model =List[TaskResponseSchema])
 def get_task_by_id(taskId:int,user:UserModel=Depends(Helper.is_auth),db:Session=Depends(con_db)):
     return AdminController.get_task_by_id(taskId,db)
 
-@Adminroutes.put("/task")
+@Adminroutes.put("/task/{taskId}")
 def update_task_by_id(task:TaskSchema,taskId:int,user:UserModel=Depends(Helper.is_auth),db:Session=Depends(con_db)):
-    return AdminController.update_task_by_id(task,taskId,db)
+    return AdminController.update_task_by_id(task,taskId,db,user)
 
 @Adminroutes.delete("/task")
 def delete_task_by_id(taskId:int,user:UserModel=Depends(Helper.is_auth),db:Session=Depends(con_db)):
-    return AdminController.delete_task_by_id(taskId,db)
+    return AdminController.delete_task_by_id(taskId,db,user)
