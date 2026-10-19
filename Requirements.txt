@@ -6,3 +6,4 @@ mysql-connector-python
 'pwdlib[argon2]'
 pyjwt
 alembic
+fastapi_mail
