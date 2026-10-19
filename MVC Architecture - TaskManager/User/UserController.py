@@ -15,7 +15,7 @@ def verify_password(plain_password,hashed_password):
     return password_hasher.verify(plain_password,hashed_password)
     
 
-async def register_user(body,db):
+async def register_user(body,bg_task,db):
     exist_username = db.query(UserModel.Users).filter(UserModel.Users.UserName == body.UserName).first()
     if exist_username:
         raise HTTPException(400,detail="UserName Already Taken Try another UserName")
@@ -33,7 +33,7 @@ async def register_user(body,db):
     db.commit()
     db.refresh(new_user)
 
-    await Mail.mail_message(body.UserEmail)
+    bg_task.add_task(Mail.mail_message,body.UserEmail)
     return new_user
 
 def login_user(body,db):

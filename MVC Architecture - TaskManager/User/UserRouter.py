@@ -1,4 +1,4 @@
-from fastapi import APIRouter,Depends,Request
+from fastapi import APIRouter,Depends,BackgroundTasks
 from . import UserController
 from .Userdb import con_Udb
 from .UserDTO import UsersRequestSchema, UsersResponseSchema, UsersLoginSchema
@@ -7,8 +7,8 @@ from sqlalchemy.orm import Session
 Userroutes = APIRouter(prefix="/uroutes")
 
 @Userroutes.post("/register",response_model=UsersResponseSchema)
-async def register_user(body:UsersRequestSchema,db:Session=Depends(con_Udb)):
-    return await UserController.register_user(body,db)
+async def register_user(body:UsersRequestSchema,bg_task:BackgroundTasks,db:Session=Depends(con_Udb)):
+    return await UserController.register_user(body,bg_task,db)
 
 @Userroutes.post("/login")
 def login_user(body:UsersLoginSchema, db:Session=Depends(con_Udb)):
