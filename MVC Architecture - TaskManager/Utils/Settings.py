@@ -7,6 +7,8 @@ class Settings(BaseSettings):
     ALGORITHM : str
     ACCESS_TOKEN_EXPIRE_MINUTES : int
     DB_URL : str
+    APP_PASSWORD:str
+    APP_EMAIL:str
 
 settings = Settings()
     
