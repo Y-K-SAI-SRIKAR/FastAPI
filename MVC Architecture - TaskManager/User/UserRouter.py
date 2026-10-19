@@ -7,8 +7,8 @@ from sqlalchemy.orm import Session
 Userroutes = APIRouter(prefix="/uroutes")
 
 @Userroutes.post("/register",response_model=UsersResponseSchema)
-def register_user(body:UsersRequestSchema,db:Session=Depends(con_Udb)):
-    return UserController.register_user(body,db)
+async def register_user(body:UsersRequestSchema,db:Session=Depends(con_Udb)):
+    return await UserController.register_user(body,db)
 
 @Userroutes.post("/login")
 def login_user(body:UsersLoginSchema, db:Session=Depends(con_Udb)):

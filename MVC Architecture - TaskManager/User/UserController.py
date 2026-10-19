@@ -5,6 +5,7 @@ import jwt
 from jwt.exceptions import InvalidTokenError
 from datetime import datetime, timedelta, timezone
 from Utils import Settings
+from Utils import Mail
 
 password_hasher = PasswordHash.recommended()
 def get_password(password):
@@ -14,7 +15,7 @@ def verify_password(plain_password,hashed_password):
     return password_hasher.verify(plain_password,hashed_password)
     
 
-def register_user(body,db):
+async def register_user(body,db):
     exist_username = db.query(UserModel.Users).filter(UserModel.Users.UserName == body.UserName).first()
     if exist_username:
         raise HTTPException(400,detail="UserName Already Taken Try another UserName")
@@ -31,6 +32,8 @@ def register_user(body,db):
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
+
+    await Mail.mail_message(body.UserEmail)
     return new_user
 
 def login_user(body,db):
